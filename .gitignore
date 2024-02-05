@@ -6,3 +6,4 @@ test_results/
 results/
 logs/
 .DS_Store
+tmp/
