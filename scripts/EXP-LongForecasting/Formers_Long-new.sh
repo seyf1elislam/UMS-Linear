@@ -11,9 +11,9 @@ fi
 # done
 
 seq_len=336
-learning_rate_value=0.005
 # features_value = M
-features_value = S
+learning_rate_value=0.005
+features_value= S
 electricity_batch_size=16
 traffic_batch_size=16
 weather_batch_size=16
