@@ -5,6 +5,7 @@ fi
 if [ ! -d "./logs/LongForecasting" ]; then
     mkdir ./logs/LongForecasting
 fi
+
 seq_len=336
 learning_rate_value=0.005
 # features_value = M 
@@ -18,7 +19,7 @@ ETTh1_batch_size=32
 ETTh2_batch_size=32
 ETTm2_batch_size=32
 # model_name=NLinear
-model_name=NormalizedDlinearWithTimeStamp
+model_name=New_ND
 for pred_len in 96 192 336 729
 do
 python -u run_longExp.py \
