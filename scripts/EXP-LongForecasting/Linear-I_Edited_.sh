@@ -9,6 +9,14 @@ seq_len=336
 learning_rate_value=0.005
 # features_value = M 
 features_value = S 
+electricity_batch_size=16
+traffic_batch_size=16
+weather_batch_size=16
+exchange_batch_size=8
+ETTm1_batch_size=8
+ETTh1_batch_size=32
+ETTh2_batch_size=32
+ETTm2_batch_size=32
 # model_name=NLinear
 model_name=NormalizedDlinearWithTimeStamp
 for pred_len in 96 192 336 729
@@ -23,9 +31,9 @@ python -u run_longExp.py \
   --features  $features_value \
   --seq_len $seq_len \
   --pred_len $pred_len \
-  --enc_in 321 \
+  --enc_in $ETTh1_batch_size1 \
   --des 'Exp' \
-  --itr 1 --batch_size 16  --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'electricity_$seq_len'_'$pred_len.log 
+  --itr 1 --batch_size $electricity_batch_size  --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'electricity_$seq_len'_'$pred_len.log 
 
 python -u run_longExp.py \
   --is_training 1 \
@@ -37,9 +45,9 @@ python -u run_longExp.py \
   --features  $features_value \
   --seq_len $seq_len \
   --pred_len $pred_len \
-  --enc_in 862 \
+  --enc_in $exchange_batch_size62 \
   --des 'Exp' \
-  --itr 1 --batch_size 16 --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'traffic_$seq_len'_'$pred_len.log 
+  --itr 1 --batch_size $traffic_batch_size --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'traffic_$seq_len'_'$pred_len.log 
 
 python -u run_longExp.py \
   --is_training 1 \
@@ -53,7 +61,7 @@ python -u run_longExp.py \
   --pred_len $pred_len \
   --enc_in 21 \
   --des 'Exp' \
-  --itr 1 --batch_size 16 --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'weather_$seq_len'_'$pred_len.log 
+  --itr 1 --batch_size $weather_batch_size --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'weather_$seq_len'_'$pred_len.log 
 
 python -u run_longExp.py \
   --is_training 1 \
@@ -65,9 +73,9 @@ python -u run_longExp.py \
   --features  $features_value \
   --seq_len $seq_len \
   --pred_len $pred_len \
-  --enc_in 8 \
+  --enc_in $exchange_batch_size \
   --des 'Exp' \
-  --itr 1 --batch_size 8 --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'exchange_$seq_len'_'$pred_len.log 
+  --itr 1 --batch_size $exchange_batch_size --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'exchange_$seq_len'_'$pred_len.log 
 
 python -u run_longExp.py \
   --is_training 1 \
@@ -81,7 +89,7 @@ python -u run_longExp.py \
   --pred_len $pred_len \
   --enc_in 7 \
   --des 'Exp' \
-  --itr 1 --batch_size 32 --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'ETTh1_$seq_len'_'$pred_len.log 
+  --itr 1 --batch_size $ETTh1_batch_size --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'ETTh1_$seq_len'_'$pred_len.log 
 
 # if pred_len=336, lr=0.001; if pred_len=720, lr=0.0001
 python -u run_longExp.py \
@@ -96,7 +104,7 @@ python -u run_longExp.py \
   --pred_len $pred_len \
   --enc_in 7 \
   --des 'Exp' \
-  --itr 1 --batch_size 32 --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'ETTh2_$seq_len'_'$pred_len.log 
+  --itr 1 --batch_size $ETTh2_batch_size --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'ETTh2_$seq_len'_'$pred_len.log 
 
 # if pred_len=336, lr=$learning_rate_value; if pred_len=720, lr=0.0005
 python -u run_longExp.py \
@@ -111,7 +119,7 @@ python -u run_longExp.py \
   --pred_len $pred_len \
   --enc_in 7 \
   --des 'Exp' \
-  --itr 1 --batch_size 8 --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'ETTm1_$seq_len'_'$pred_len.log 
+  --itr 1 --batch_size $ETTm1_batch_size --learning_rate $learning_rate_value --individual >logs/LongForecasting/$model_name'_I_'ETTm1_$seq_len'_'$pred_len.log 
 
 python -u run_longExp.py \
   --is_training 1 \
@@ -125,11 +133,11 @@ python -u run_longExp.py \
   --pred_len $pred_len \
   --enc_in 7 \
   --des 'Exp' \
-  --itr 1 --batch_size 32 --learning_rate 0.01 --individual >logs/LongForecasting/$model_name'_I_'ETTm2_$seq_len'_'$pred_len.log 
+  --itr 1 --batch_size $ETTm2_batch_size --learning_rate 0.01 --individual >logs/LongForecasting/$model_name'_I_'ETTm2_$seq_len'_'$pred_len.log 
 done
 
 seq_len=104
-for pred_len in 24 36 48 60
+for pred_len in 24 36 4$exchange_batch_size 60
 do
 python -u run_longExp.py \
   --is_training 1 \
@@ -140,10 +148,10 @@ python -u run_longExp.py \
   --data custom \
   --features  $features_value \
   --seq_len $seq_len \
-  --label_len 18 \
+  --label_len 1$exchange_batch_size \
   --pred_len $pred_len \
   --enc_in 7 \
   --des 'Exp' \
-  --itr 1 --batch_size 32 --learning_rate 0.01 --individual >logs/LongForecasting/$model_name'_I_'ILI_$seq_len'_'$pred_len.log 
+  --itr 1 --batch_size $national_illness_batch_size --learning_rate 0.01 --individual >logs/LongForecasting/$model_name'_I_'ILI_$seq_len'_'$pred_len.log 
 done
 
