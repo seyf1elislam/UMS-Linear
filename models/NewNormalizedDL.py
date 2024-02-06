@@ -51,7 +51,7 @@ class Model(nn.Module):
     New model-
     """
     def __init__(self, configs,kernel_size=[25]):
-        super(Model, self).__init__()
+        
         self.seq_len = configs.seq_len
         self.pred_len = configs.pred_len
         self.batch_size = configs.batch_size
