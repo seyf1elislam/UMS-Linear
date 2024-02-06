@@ -109,37 +109,20 @@ class Model(nn.Module):
         self.ResultSeq =nn.Sequential(
                   nn.Linear(self.seq_len,self.pred_len),
               )
-        self.LG =nn.Sequential(
-                  nn.Linear(self.seq_len,self.seq_len),
-                  nn.GELU(),
-                  nn.Linear(self.seq_len,1),
-              )
-        self.LG1 =nn.Sequential(
-                  nn.Linear(self.seq_len,self.pred_len),
-                  # nn.GELU(),
-                  # nn.Linear(self.pred_len,self.pred_len),
-              )
-        self.LG2 =nn.Sequential(
-                  nn.Linear(self.pred_len,self.pred_len),
-                  # nn.GELU(),
-                  # nn.Linear(self.pred_len,self.pred_len),
-              )
+        
 
     def forward(self, x, batch_x_mark, dec_inp, batch_y_mark,y=None):
         # x: [Batch, Input length, Channel]
-        s, t = self.decompsition1(x)
+
 
         # Normalisation
         seq_last = x[:,-1:,:].detach()
         # seq_last = t[:,-1:,:].detach()
         x = x - seq_last
         z = x.detach()
+
         # Selector
         selector = torch.zeros([x.shape[0],self.seq_len,x.shape[2]],dtype=x.dtype).to(x.device)
-        # population = x.mean() * (8126 / (8126 - 4063))
-        # population = x.mean() * ((self.batch_size*self.seq_len)/((self.batch_size*self.seq_len)-(self.batch_size*self.pred_len)))
-        # population = x.mean() * ((22*self.seq_len*self.batch_size) / ((22*self.seq_len*self.batch_size)*x.std()))
-        p = self.LG(x.permute(0,2,1)).sum(0).squeeze()
         equalizer = np.sqrt(((self.seq_len+self.pred_len)*self.batch_size)/((self.batch_size*(self.pred_len+self.seq_len))-(self.batch_size*(self.seq_len))))
         population = x.mean() * equalizer
         condition = population + self.SelectorDistance
@@ -172,30 +155,19 @@ class Model(nn.Module):
         seasonal_out1 = self.SeasonalSeq1(seasonal_init1.permute(0,2,1)).permute(0,2,1)
         trend_out1 = self.TrendSeq1(trend_init1.permute(0,2,1)).permute(0,2,1)
 
-
-        decide = self.relu(torch.sin(self.LN1))
-
-        # decide1 = self.relu(torch.sin(self.LN1))
-
         seasonal_out = seasonal_out*self.LN + seasonal_out1 * (1-self.LN)
 
-        # trend_out = trend_out*self.LN1 + trend_out1 * (1-self.LN1)
 
-        # forecast = seasonal_out + trend_out
-
-        forecast = seasonal_out1 + trend_out #* self.LN1
+        forecast = seasonal_out1 + trend_out 
 
         # Results
         y = self.ResultSeq(x.permute(0,2,1) * timestamps ).permute(0,2,1).mean(axis=2).unsqueeze(2)
 
-        timestamps = self.LG1(timestamps.permute(0,2,1) ).permute(0,2,1)
 
         y = y * forecast   + seq_last
 
-        # y = y.mean(axis=2).unsqueeze(2)
 
         return y # to [Batch, Output length, Channel]
-
 
 
 
