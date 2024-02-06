@@ -76,7 +76,7 @@ parser.add_argument('--devices', type=str, default='0,1,2,3', help='device ids o
 parser.add_argument('--test_flop', action='store_true', default=False, help='See utils/tools for usage')
 
 
-parser.add_argument('--seed', type=int, required=True, default=2021, help='seed')
+parser.add_argument('--seed', type=int, required=False, default=2021, help='seed')
 args = parser.parse_args()
 #=============================================
 #!SeedConfig
