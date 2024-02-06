@@ -118,7 +118,7 @@ if args.is_training:
             args.embed,
             args.distil,
             args.des, ii)
-        print(args)
+
         exp = Exp(args)  # set experiments
         print('>>>>>>>start training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>'.format(setting))
         exp.train(setting)
