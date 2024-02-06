@@ -31,8 +31,8 @@ class Exp_Main(Exp_Basic):
             'DLinear': DLinear,
             'NLinear': NLinear,
             'Linear': Linear,
-            "New_ND":NormalizedDLWithTimeStamp,
-            "NewNewNormalizedDL":NewNormalizedDL
+            "NormalizedDLWithTimeStamp":NormalizedDLWithTimeStamp,
+            "NewNormalizedDL":NewNormalizedDL
         }
         model = model_dict[self.args.model].Model(self.args).float()
 
