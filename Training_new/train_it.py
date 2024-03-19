@@ -5,7 +5,8 @@ import torch
 import random
 import numpy as np
 # %matplotlib inline
-from exp.exp_main import Exp_Main, Exp_Main_Edit1
+from exp.exp_main import Exp_Main
+from exp.exp_main_edit1 import Exp_Main_Edit1
 
 # fix_seed = 2021
 # random.seed(fix_seed)
