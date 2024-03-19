@@ -1,14 +1,12 @@
 #@title exp Ultimate Exp class (contains custom-loss option and save returns options)
 from data_provider.data_factory import data_provider
 from exp.exp_basic import Exp_Basic
-from models import Informer, Autoformer, Transformer, DLinear, Linear, NLinear
-# ,NormalizedDLWithTimeStamp,NewNormalizedDL
+from models import Informer, Autoformer, Transformer, DLinear, Linear, NLinear #,NormalizedDLWithTimeStamp,NewNormalizedDL
 
 from utils.tools import EarlyStopping, adjust_learning_rate,test_params_flop
 from utils.metrics import metric
 
 import numpy as np
-import pandas as pd
 import torch
 import torch.nn as nn
 from torch import optim
@@ -16,7 +14,7 @@ import os
 import time
 import warnings
 import matplotlib.pyplot as plt
-import numpy as np
+
 
 def visual(true, preds=None, name='./pic/test.pdf'):
     """
@@ -38,20 +36,17 @@ default_model_dict = {
             'DLinear': DLinear,
             'NLinear': NLinear,
             'Linear': Linear,
-        }
-# default_model_dict = {
-#             'Autoformer': Autoformer,
-#             'Transformer': Transformer,
-#             'Informer': Informer,
-#             'DLinear': DLinear,
-#             'NLinear': NLinear,
-#             'Linear': Linear,
-#             "New_ND":NormalizedDLWithTimeStamp,
-#             "NewNewNormalizedDL":NewNormalizedDL
+            # "New_ND":NormalizedDLWithTimeStamp,
+            # "NewNewNormalizedDL":NewNormalizedDL
+}
+def does_nothing():
+    #this will be used to overide print function when it disabled
+    pass
 
 class Exp_Main_Edit1(Exp_Basic):
-    def __init__(self, args,global_model_dict=default_model_dict):
+    def __init__(self, args,global_model_dict=default_model_dict,disable_train_print=True):
         self.model_dict = global_model_dict
+        self.disable_train_print = disable_train_print
         super(Exp_Main_Edit1, self).__init__(args)
 
     def _build_model(self):
@@ -153,6 +148,9 @@ class Exp_Main_Edit1(Exp_Basic):
         return total_loss
 
     def train(self, setting,use_custom_loss = False,custom_loss=None):
+        if self.disable_train_print :
+            print = does_nothing
+    
         train_data, train_loader = self._get_data(flag='train')
         if not self.args.train_only:
             vali_data, vali_loader = self._get_data(flag='val')
@@ -279,6 +277,7 @@ class Exp_Main_Edit1(Exp_Basic):
         return self.model
 
     def test(self, setting, test=0,save_return_dict_asfile = False):
+
         is_it_return_dict = False
         test_data, test_loader = self._get_data(flag='test')
 

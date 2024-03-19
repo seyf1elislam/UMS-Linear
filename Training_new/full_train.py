@@ -32,6 +32,8 @@ def full_train(
     custom_loss =lambda batch_y, outputs, criterion: criterion(outputs, batch_y),
     save_return_dict_asfile=False,
     patience =3,
+    disable_train_print = True,
+    disable_all_print = False,
     ):
   torch.cuda.empty_cache()
   fix_seed = seed
@@ -77,6 +79,8 @@ def full_train(
       custom_loss=custom_loss,
       fix_seed=seed,
       save_return_dict_asfile=save_return_dict_asfile,
+      disable_train_print = disable_train_print,
+      disable_all_print = disable_all_print,
     )
     results.append({
         "pred_len":pred_len,

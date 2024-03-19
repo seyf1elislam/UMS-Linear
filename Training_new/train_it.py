@@ -13,11 +13,23 @@ from exp.exp_main_edit1 import Exp_Main_Edit1
 # torch.manual_seed(fix_seed)
 # np.random.seed(fix_seed)
 
+def does_nothing():
+    #this will be used to overide print function when it disabled
+    pass
+
 def train_it(args,global_model_dict,use_edited_exp=True,
              use_custom_loss=False,
              custom_loss=None,
              fix_seed=2021,
-             save_return_dict_asfile=False):
+             save_return_dict_asfile=False,
+             disable_train_print = False,
+             disable_all_print = False,
+             ):
+  
+  #!=========================
+  if disable_all_print:
+    print = does_nothing
+    disable_train_print = True
   #=========================
   if use_edited_exp:
     Exp = Exp_Main_Edit1
@@ -34,7 +46,10 @@ def train_it(args,global_model_dict,use_edited_exp=True,
           # setting record of experiments
           setting = f"{args.model_id}{args.model}_{args.data}_ft{args.features}_sl{args.seq_len}_ll{args.label_len}_pl{args.pred_len}_dm{args.d_model}_nh{args.n_heads}_el{args.e_layers}_dl{args.d_layers}_df{args.d_ff}_fc{args.factor}eb{args.embed}dt{args.distil}{args.des}{ii}"
           if use_edited_exp:
-            exp = Exp(args,global_model_dict=global_model_dict)  # set experiments
+            exp = Exp(args,
+                      global_model_dict=global_model_dict,
+                      disable_train_print=disable_train_print,
+                      )  # set experiments
             print(f'>>>>>>>start training : {setting}>>>>>>>>>>>>>>>>>>>>>>>>>>')
             # exp.train(setting , use_custom_loss=use_custom_loss)
             exp.train(setting , custom_loss=custom_loss)
