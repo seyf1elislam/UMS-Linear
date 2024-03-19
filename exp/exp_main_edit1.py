@@ -150,7 +150,7 @@ class Exp_Main_Edit1(Exp_Basic):
                 else :
                   loss = criterion(outputs, batch_y)
 
-                total_loss.append(loss)
+                total_loss.append(loss.cpu())
         total_loss = np.average(total_loss)
         self.model.train()
         return total_loss
