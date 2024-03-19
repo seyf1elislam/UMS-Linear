@@ -145,7 +145,10 @@ class Exp_Main_Edit1(Exp_Basic):
                 pred = outputs.detach().cpu()
                 true = batch_y.detach().cpu()
 
-                loss = criterion(pred, true)
+                if custom_loss :
+                  loss = custom_loss(batch_y,outputs,criterion)
+                else :
+                  loss = criterion(outputs, batch_y)
 
                 total_loss.append(loss)
         total_loss = np.average(total_loss)
