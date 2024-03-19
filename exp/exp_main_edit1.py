@@ -336,7 +336,8 @@ class Exp_Main_Edit1(Exp_Basic):
 
                         else:
                             #=============================================================================
-                            outputs,extra_data_dict = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                            #outputs,extra_data_dict = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                            outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                             results_= self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                             if isinstance(results_, tuple):
                               outputs,extra_data_dict = results_
