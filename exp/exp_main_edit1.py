@@ -48,11 +48,11 @@ default_model_dict = {
 #             'Linear': Linear,
 #             "New_ND":NormalizedDLWithTimeStamp,
 #             "NewNewNormalizedDL":NewNormalizedDL
-#         }
+
 class Exp_Main_Edit1(Exp_Basic):
     def __init__(self, args,global_model_dict=default_model_dict):
-        super(Exp_Main_Edit1, self).__init__(args)
         self.model_dict = global_model_dict
+        super(Exp_Main_Edit1, self).__init__(args)
 
     def _build_model(self):
         # model_dict = global_model_dict
@@ -109,13 +109,35 @@ class Exp_Main_Edit1(Exp_Basic):
                             else:
                                 outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                 else:
+                    # if 'Linear' in self.args.model:
+                    #     outputs,_ = self.model(batch_x)
+                    # else:
+                    #     if self.args.output_attention:
+                    #         outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
+                    #     else:
+                    #         outputs,_ = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                     if 'Linear' in self.args.model:
-                        outputs,_ = self.model(batch_x)
+                            #=============================================================================
+                            # outputs,extra_data_dict = self.model(batch_x)
+                            results_= self.model(batch_x)
+                            if isinstance(results_, tuple):
+                              outputs,extra_data_dict = results_
+                            else :
+                              outputs = results_
+                            #=============================================================================
                     else:
                         if self.args.output_attention:
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
+
                         else:
-                            outputs,_ = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                            #=============================================================================
+                            outputs,extra_data_dict = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                            results_= self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                            if isinstance(results_, tuple):
+                              outputs,extra_data_dict = results_
+                            else :
+                              outputs = results_
+                            #=============================================================================
                 f_dim = -1 if self.args.features == 'MS' else 0
                 outputs = outputs[:, -self.args.pred_len:, f_dim:]
                 batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.device)
@@ -256,7 +278,7 @@ class Exp_Main_Edit1(Exp_Basic):
 
         return self.model
 
-    def test(self, setting, test=0,save_return_dict = False):
+    def test(self, setting, test=0,save_return_dict_asfile = False):
         is_it_return_dict = False
         test_data, test_loader = self._get_data(flag='test')
 
@@ -303,7 +325,6 @@ class Exp_Main_Edit1(Exp_Basic):
                               is_it_return_dict=True
                             else :
                               outputs = results_
-
                             #=============================================================================
                     else:
                         if self.args.output_attention:
@@ -353,7 +374,7 @@ class Exp_Main_Edit1(Exp_Basic):
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
         #=======================================================
-        if is_it_return_dict and save_return_dict:
+        if is_it_return_dict and save_return_dict_asfile:
           for i in extra_data_dict.keys():
             dt = []
             ext_data =extra_data_dict[i].detach().cpu().numpy()
