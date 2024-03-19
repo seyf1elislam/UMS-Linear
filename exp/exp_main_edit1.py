@@ -149,9 +149,8 @@ class Exp_Main_Edit1(Exp_Basic):
 
     def train(self, setting,use_custom_loss = False,custom_loss=None):
         if self.disable_train_print :
-            def print(*args, **kwargs):
-                pass
-            
+            print = does_nothing
+    
         train_data, train_loader = self._get_data(flag='train')
         if not self.args.train_only:
             vali_data, vali_loader = self._get_data(flag='val')

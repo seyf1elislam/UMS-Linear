@@ -13,7 +13,9 @@ from exp.exp_main_edit1 import Exp_Main_Edit1
 # torch.manual_seed(fix_seed)
 # np.random.seed(fix_seed)
 
-
+def does_nothing():
+    #this will be used to overide print function when it disabled
+    pass
 
 def train_it(args,global_model_dict,use_edited_exp=True,
              use_custom_loss=False,
@@ -26,8 +28,7 @@ def train_it(args,global_model_dict,use_edited_exp=True,
   
   #!=========================
   if disable_all_print:
-    def print(*args, **kwargs):
-        pass
+    print = does_nothing
     disable_train_print = True
   #=========================
   if use_edited_exp:
