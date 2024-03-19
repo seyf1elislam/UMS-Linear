@@ -84,7 +84,7 @@ class Exp_Main_Edit1(Exp_Basic):
         criterion = nn.MSELoss()
         return criterion
 
-    def vali(self, vali_data, vali_loader, criterion):
+    def vali(self, vali_data, vali_loader, criterion,custom_loss=None):
         total_loss = []
         self.model.eval()
         with torch.no_grad():
@@ -259,7 +259,7 @@ class Exp_Main_Edit1(Exp_Basic):
             print("Epoch: {} cost time: {}".format(epoch + 1, time.time() - epoch_time))
             train_loss = np.average(train_loss)
             if not self.args.train_only:
-                vali_loss = self.vali(vali_data, vali_loader, criterion)
+                vali_loss = self.vali(vali_data, vali_loader, criterion,custom_loss=custom_loss)
                 test_loss = self.vali(test_data, test_loader, criterion)
 
                 print("Epoch: {0}, Steps: {1} | Train Loss: {2:.7f} Vali Loss: {3:.7f} Test Loss: {4:.7f}".format(
