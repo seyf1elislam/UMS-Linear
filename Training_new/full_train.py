@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import torch
 import random
 import numpy as np
-from full_train import train_it
+from train_it import train_it
 # %matplotlib inline
 
 class AttributeDict(dict):
