@@ -15,7 +15,8 @@ def getModelDict(model_class):
   return AttributeDict({"Model":model_class})
 
 def full_train(
-   global_model_dict, args,
+    args,
+    global_model_dict,
     model="Linear",
     custom_model=None,
     features="S",
