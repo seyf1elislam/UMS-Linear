@@ -1,4 +1,3 @@
-#@title  # $\color{cyan}{\text{full train func  (#3)}}$
 import matplotlib.pyplot as plt
 import torch
 import random
@@ -27,11 +26,11 @@ def full_train(
     add_linear_to_name = False,
     note="",
     use_edited_exp = True,
-    use_custom_loss=False,
     # custom_loss =default_loss,
     custom_loss =lambda batch_y, outputs, criterion: criterion(outputs, batch_y),
     save_return_dict_asfile=False,
     patience =3,
+    use_print = True,
     ):
   torch.cuda.empty_cache()
   fix_seed = seed
@@ -60,6 +59,7 @@ def full_train(
   args.batch_size=batch_size
   args.enc_in = enc_in
   args.individual = False
+  args.use_print = use_print
 
   # args.patch_len = 16
   # args.stride = 8
