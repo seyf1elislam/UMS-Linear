@@ -48,7 +48,12 @@ def full_train(
 
   # args.timeenc = 0
   args.data_path=f"{data}.csv"
-  args.data=data
+
+  if data not in ["ETTh1","ETTh2","ETTm1","ETTm2"]:
+    args.data ="custom"
+  else :
+    args.data =data
+  
   args.learning_rate = learning_rate
   args.train_epochs = train_epochs
   args.model=model
