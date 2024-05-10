@@ -77,12 +77,16 @@ in evaluation we used mse / mae so we can compare with other existing models res
 
 ![model evaluation](https://raw.githubusercontent.com/seyf1elislam/UMS-Linear/main/imgs/ums-linear-results.png)
 
-the resuls shown the domination of UMS-Linear over the Base model Nlinear, Dlienar and the other models such patchTST ,timesNet,FedFormer,autoformer and the other models in ETTh1,ETTh2,ETTm1,ETTm2 in all horizons (96,192,336,720).
+the resuls shown the domination of UMS-Linear over the Base model Nlinear, Dlienar and the other models such patchTST ,timesNet,FedFormer,autoformer and the other models in univarate benchmarks ETTh1,ETTh2,ETTm1,ETTm2 and all horizons (96,192,336,720).
 
 # visualization :
 
 > Dlinear vs UMS-Linear <br/> ![dlinear vs umslinear](https://raw.githubusercontent.com/seyf1elislam/UMS-Linear/main/imgs/umslinear_vs_dlinear_plot.png)
 
+# Datasets
+
+- [https://github.com/zhouhaoyi/ETDataset](https://github.com/zhouhaoyi/ETDataset)
+
 # Acknowledgement
 
-> - Thanks to the authors of the original model LSTF-Linear and Authors AutoFormer paper for Sharing the Implementation of Thier Models and .
+> - Thanks to the authors of the original model LSTF-Linear and Authors AutoFormer paper for Sharing the Implementation of Thier Models .
