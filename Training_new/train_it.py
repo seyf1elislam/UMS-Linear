@@ -1,30 +1,23 @@
-#@title CoreProgram (Define ArgsDict + train it func)
-import os
 import torch
-# from exp.exp_main import Exp_Main
 import random
 import numpy as np
-# %matplotlib inline
 from exp.exp_main import Exp_Main
 from exp.exp_main_edit1 import Exp_Main_Edit1
 
-# fix_seed = 2021
-# random.seed(fix_seed)
-# torch.manual_seed(fix_seed)
-# np.random.seed(fix_seed)
 
 def train_it(args,global_model_dict,use_edited_exp=True,
              use_custom_loss=False,
              custom_loss=None,
-             fix_seed=2021,
+             fix_seed=None,
              save_return_dict_asfile=False):
   #=========================
   if use_edited_exp:
     Exp = Exp_Main_Edit1
   else :
     Exp = Exp_Main
+  if fix_seed is None:
+    fix_seed = random.randint(0, 100000)
   #=========================
-  # fix_seed=2021
   random.seed(fix_seed)
   torch.manual_seed(fix_seed)
   np.random.seed(fix_seed)
