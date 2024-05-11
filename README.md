@@ -48,7 +48,7 @@ The model was trained on a Free Tier Colab, using the Adam optimizer, for less t
 
 ## Loss Function:
 
-> In this paper, we used a combination of MSE and MAE with diff ($diff=X_{i}- X_{i-1}$): 0.33 × MSE + 0.33 × MAE + 0.33 × diff <br/> `Note: This loss function is used only during training. During evaluation, we used pure MSE and MAE without any modifications.`
+> In this project, we used a combination of MSE and MAE with diff ($diff=X_{i}- X_{i-1}$): 0.33 × MSE + 0.33 × MAE + 0.33 × diff <br/> `Note: This loss function is used only during training. During evaluation, we used pure MSE and MAE without any modifications.`
 
 ## Model Evaluation
 
