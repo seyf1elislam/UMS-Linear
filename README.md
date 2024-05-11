@@ -1,26 +1,10 @@
-# Univariate Multiscale Decomposition: Improving Linear Models for Univariate Long-term Time Series Forecasting (Pais'24 2024)
+# Univariate Multiscale Decomposition: Improving Linear Models for Univariate Long-term Time Series Forecasting 
 
-This repo is the official PyTorch implementation of UMS-Linear [Univariate Multiscale Decomposition: Improving Linear Models for Univariate Long-term Time Series Forecasting (Pais'24 2024)](https://github.com/seyf1elislam/UMS-Linear/). The model is implemented in PyTorch and tested on multiple benchmark datasets. It outperforms the existing state-of-the-art models on multiple univariate time series forecasting benchmarks.
+This repo is the official PyTorch implementation of UMS-Linear [Univariate Multiscale Decomposition: Improving Linear Models for Univariate Long-term Time Series Forecasting)](https://github.com/seyf1elislam/UMS-Linear/). The model is implemented in PyTorch and tested on multiple benchmark datasets. It outperforms the existing state-of-the-art models on multiple univariate time series forecasting benchmarks.
 
 ## Updates
 
-- [x] Paper accepted at Pais'24 (2024-04-04)
 - [x] UMS-Model added (2024-02-05)
-
-## Abstract
-
-```text
-In recent years, Transformers have conquered most AI fields such as Natural Language Processing (NLP) and Computer Vision (CV). However, when it comes to time series forecasting, the latest research shows that Transformers suffer from temporal loss due to the permutation invariance of the self-attention mechanism. This gives an opportunity for various models to excel, such as CNN-based, RNN-based, and MLP-based models, which are the simplest and have the lowest number of parameters.
-
-Current MLP models show good performance in following the data mean and seasonality but still struggle to follow data trends and sharp changes. To address these limitations, we propose the Univariate Multiscale Linear (UMS-Linear) model, which is an MLP-based model that uses timestamps and multiscale decomposition to boost the performance of MLP-based models. The experiments show that UMS-Linear outperforms the existing state-of-the-art models in multiple univariate forecasting benchmarks. These results confirm that MLP-based models have the ability to achieve even better performance in future research.
-```
-
-## Authors
-
-> - Sellami Mohammed Abdelhadi - `sellami.mohammedabdelhadi@univ-ouargla.dz`
-> - Hamzi Oussama Seyf Elislam - `hamzi.oussamaseyfelislam@univ-ouargla.dz`
-> - Khaldi Bilel - `khaldi.belal@univ-ouargla.dz`
-> - Aiadi Oussama - `aiadi.oussama@univ-ouargla.dz`
 
 ## Detailed Description
 
