@@ -1,92 +1,89 @@
-# Univariate Multiscale Decomposition : Improving Linear Models in Univariate long-term time series forecasting (Pais'24 2024)
+# Univariate Multiscale Decomposition: Improving Linear Models for Univariate Long-term Time Series Forecasting (Pais'24 2024)
 
-This repo is official Pytorch imeplementation of UMS-Linear [Univariate Multiscale Decomposition : Improving Linear Models in Univariate long-term time series forecasting (Pais'24 2024)](https://github.com/seyf1elislam/UMS-Linear/) , the model is implemented in Pytorch and tested on multiple benchmarks datasets , the model is tested on multiple benchmarks datasets and outperformed the existing SOTA in multiple benchmarks In UniVariate Timesereis forcasting.
+This repo is the official PyTorch implementation of UMS-Linear [Univariate Multiscale Decomposition: Improving Linear Models for Univariate Long-term Time Series Forecasting (Pais'24 2024)](https://github.com/seyf1elislam/UMS-Linear/). The model is implemented in PyTorch and tested on multiple benchmark datasets. It outperforms the existing state-of-the-art models on multiple univariate time series forecasting benchmarks.
 
 ## Updates
 
-- [x] Acceptance of the paper in Pais'24 (2024-04-04)
-- [x] adding UMS-Model (2024-02-05)
+- [x] Paper accepted at Pais'24 (2024-04-04)
+- [x] UMS-Model added (2024-02-05)
 
-# abstract
+## Abstract
 
 ```text
-Recent years , Transformers has conquered Most AI fields such as Natural language processing (NLP) and Computer vision (CV) ,but when it comes to time series forecasting  latest researches shows that Transformers suffers with temporal loss due the the permutation invariant of the self-attention mechanism. that gives the chance to many different models to shine such as CNN-based models  and RNN-based  and MLP-based models  which is the simplest and lowest number of parameters .
-  Current MLP models, shows a good signs  on following the data mean  and data-seasonality ,but still struggle to follow the data trends  and the sharp changes , in order  to address these limitation , we propose  Uni-variate Multi Scale Linear (UMS-Linear)  model which is an MLP-based that uses Timestamps and multi scale decomposition to boost MLP-Based models to higher level . The experiments shows that UMS-Linear outperform the existing uni-variate forecasting SOTA in multiple benchmarks,these results confirms that MLP-based models have the ability to  reach even  better performance in the future researches.
+In recent years, Transformers have conquered most AI fields such as Natural Language Processing (NLP) and Computer Vision (CV). However, when it comes to time series forecasting, the latest research shows that Transformers suffer from temporal loss due to the permutation invariance of the self-attention mechanism. This gives an opportunity for various models to excel, such as CNN-based, RNN-based, and MLP-based models, which are the simplest and have the lowest number of parameters.
+
+Current MLP models show good performance in following the data mean and seasonality but still struggle to follow data trends and sharp changes. To address these limitations, we propose the Univariate Multiscale Linear (UMS-Linear) model, which is an MLP-based model that uses timestamps and multiscale decomposition to boost the performance of MLP-based models. The experiments show that UMS-Linear outperforms the existing state-of-the-art models in multiple univariate forecasting benchmarks. These results confirm that MLP-based models have the ability to achieve even better performance in future research.
 ```
 
-# Authors
+## Authors
 
 > - Sellami Mohammed Abdelhadi - `sellami.mohammedabdelhadi@univ-ouargla.dz`
 > - Hamzi Oussama Seyf Elislama - `hamzi.oussamaseyfelislam@univ-ouargla.dz`
-> - khaldi Bilel - `khaldi.belal@univ-ouargla.dz`
+> - Khaldi Bilel - `khaldi.belal@univ-ouargla.dz`
 > - Aiadi Oussama - `aiadi.oussama@univ-ouargla.dz`
 
-# Detailed Description
+## Detailed Description
 
 | Files                                                     | Description                                                                                                     |
 | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `UMS-Linear.ipynb`                                        | Jupyter notebook for Testing UMS-Linear                                                                         |
-| `Models/UMS-Linear.py`                                    | contains the implementation UMS-Linear                                                                          |
-| `/Training_new/train_it.py` `/Training_new/full_train.py` | Contains the datasets used in the experiments.                                                                  |
+| `UMS-Linear.ipynb`                                        | Jupyter notebook for testing UMS-Linear                                                                         |
+| `Models/UMS-Linear.py`                                    | Contains the implementation of UMS-Linear                                                                       |
+| `/Training_new/train_it.py` `/Training_new/full_train.py` | contains the Training Function that runs experiments                                                                        |
 | `/exp/exp_main_edit1.py`                                  | Contains the Exp class for UMS-Linear compatible with `/Training_new/train_it.py` `/Training_new/full_train.py` |
 
-the rest of are same as the original container that used by LTSF-lienar and autoformer , it containes data provider and the exp class , we add custom Exp class for UMS-Linear providing more customization for the training.
+The rest of the files are the same as the original container used by LTSF-Linear and AutoFormer. It contains the data provider and the Exp class. We have added a custom Exp class for UMS-Linear, providing more customization for training.
 
-# UMS-Linear Model
+## UMS-Linear Model
 
-## Model Architecture
+### Model Architecture
 
 ![model architecture](https://raw.githubusercontent.com/seyf1elislam/UMS-Linear/main/imgs/ums-linear_architecture.png)
 
-the model is based on MLP-based model that uses Timestamps and multi scale decomposition to boost MLP-Based models to higher level , the model is based on the following steps :
+The model is based on an MLP-based model that uses timestamps and multiscale decomposition to boost the performance of MLP-based models. The model follows these steps:
 
-1. Timestamps Embedding : the model uses the timestamps as input to the model , the timestamps are embedded using a simple dense layer
-2. Multi Scale Decomposition : after normilizing the data model scales the data into multiple scales using the following scales [100% ,50% ,25%] ,then decompose using Trend and Reminder decomposition. , the decomposed data is then passed to the MLP model. this helps model to reduce the noise effects and focus on the data trends.
+1. **Timestamp Embedding**: The model uses timestamps as input and embeds them using a simple dense layer.
+2. **Multiscale Decomposition**: After normalizing the data, the model scales the data into multiple scales using the following scales: [100%, 50%, 25%]. It then decomposes the data using trend and remainder decomposition. The decomposed data is passed to the MLP model. This helps the model reduce the effects of noise and focus on data trends.
+3. **Residual Connection**: The model uses residual connections to connect the decomposed data with the original data. This helps the model follow data trends and sharp changes.
+4. **Reconstruction Phase**: By multiplying the results of each layer, the model reconstructs the final output.
 
-3. Residual Connection : the model uses residual connection to connect the decomposed data with the original data , this helps the model to follow the data trends and sharp changes.
+This simple architecture gives UMS-Linear the following characteristics:
 
-4. Reconstruction Phase : by multiplying the results of each layer , the
+> - High efficiency in terms of the number of parameters and computation
+> - High speed in terms of training and inference
+> - High accuracy in terms of univariate forecasting
+> - O(1) time/memory complexity
+> - Small number of parameters that can be trained with the lowest computational cost
 
-> This simple architecture gives UMS-Linear these Characteristics :
->
-> - High efficiency in terms of number of parameters and computation.
-> - High speed in terms of training and inference.
-> - High accuracy in terms Univariate of forecasting.
-> - O(1) Time/memory complexity.
-> - Small number of parameters can be used and trained in lowest computational cost.
+### Impact of Timestamps:
 
-### Impact of Timestamps :
-
-> impact of Timestamps : visualised in simple linear model vs linear model with timestamps<br/> ![alt text](https://raw.githubusercontent.com/seyf1elislam/UMS-Linear/main/imgs/linear_vs_timestamp_linear_plot.png)
+> The impact of timestamps is visualized by comparing a simple linear model with a linear model with timestamps.<br/> ![alt text](https://raw.githubusercontent.com/seyf1elislam/UMS-Linear/main/imgs/linear_vs_timestamp_linear_plot.png)
 
 ## Model Training
 
-The model trained in Free Tier Colab , using adam optimizer , for less then 15 epochs with ealystoping patience factor 3 , and batch size of 336 , 512 ,with learning rate of 0.001 and 0.0005 , the model is trained on multiple benchmarks datasets and outperformed the existing SOTA in multiple univariate benchmarks.
+The model was trained on a Free Tier Colab, using the Adam optimizer, for less than 15 epochs with an early stopping patience factor of 3, a batch size of 336 or 512, and a learning rate of 0.001 or 0.0005. The model was trained on multiple benchmark datasets and outperformed the existing state-of-the-art models on multiple univariate benchmarks.
 
-## loss function :
+## Loss Function:
 
-> in this paper we used :
->
-> - combination MSE and MAE with diff ($diff=X_{i}- X_{i-1}$): 0.33 _ MSE + 0.33 _ MAE + 0.33 \* diff <br/> `Note : this loss functions are used only in the training , during the evaluation we used MSE ,and MAE Pure without edit`
+> In this paper, we used a combination of MSE and MAE with diff ($diff=X_{i}- X_{i-1}$): 0.33 × MSE + 0.33 × MAE + 0.33 × diff <br/> `Note: This loss function is used only during training. During evaluation, we used pure MSE and MAE without any modifications.`
 
 ## Model Evaluation
 
-in evaluation we used mse / mae so we can compare with other existing models results
+During evaluation, we used MSE and MAE to compare the results with other existing models.
 
 ## Results
 
 ![model evaluation](https://raw.githubusercontent.com/seyf1elislam/UMS-Linear/main/imgs/ums-linear-results.png)
 
-the resuls shown the domination of UMS-Linear over the Base model Nlinear, Dlienar and the other models such patchTST ,timesNet,FedFormer,autoformer and the other models in univarate benchmarks ETTh1,ETTh2,ETTm1,ETTm2 and all horizons (96,192,336,720).
+The results show the dominance of UMS-Linear over the base models Nlinear, Dlinear, and other models such as PatchTST, TimesNet, FedFormer, AutoFormer, and others on univariate benchmarks ETTh1, ETTh2, ETTm1, ETTm2, and all horizons (96, 192, 336, 720).
 
-# visualization :
+## Visualization:
 
 > Dlinear vs UMS-Linear <br/> ![dlinear vs umslinear](https://raw.githubusercontent.com/seyf1elislam/UMS-Linear/main/imgs/umslinear_vs_dlinear_plot.png)
 
-# Datasets
+## Datasets
 
 - [https://github.com/zhouhaoyi/ETDataset](https://github.com/zhouhaoyi/ETDataset)
 
-# Acknowledgement
+## Acknowledgement
 
-> - Thanks to the authors of the original model LSTF-Linear and Authors AutoFormer paper for Sharing the Implementation of Thier Models .
+> - Thanks to the authors of the original LSTF-Linear model and the authors of the AutoFormer paper for sharing their model implementations.
