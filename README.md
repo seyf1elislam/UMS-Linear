@@ -18,7 +18,7 @@ Current MLP models show good performance in following the data mean and seasonal
 ## Authors
 
 > - Sellami Mohammed Abdelhadi - `sellami.mohammedabdelhadi@univ-ouargla.dz`
-> - Hamzi Oussama Seyf Elislama - `hamzi.oussamaseyfelislam@univ-ouargla.dz`
+> - Hamzi Oussama Seyf Elislam - `hamzi.oussamaseyfelislam@univ-ouargla.dz`
 > - Khaldi Bilel - `khaldi.belal@univ-ouargla.dz`
 > - Aiadi Oussama - `aiadi.oussama@univ-ouargla.dz`
 
@@ -28,7 +28,7 @@ Current MLP models show good performance in following the data mean and seasonal
 | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | `UMS-Linear.ipynb`                                        | Jupyter notebook for testing UMS-Linear                                                                         |
 | `Models/UMS-Linear.py`                                    | Contains the implementation of UMS-Linear                                                                       |
-| `/Training_new/train_it.py` `/Training_new/full_train.py` | contains the Training Function that runs experiments                                                                        |
+| `/Training_new/train_it.py` `/Training_new/full_train.py` | contains the Training Function that runs experiments                                                            |
 | `/exp/exp_main_edit1.py`                                  | Contains the Exp class for UMS-Linear compatible with `/Training_new/train_it.py` `/Training_new/full_train.py` |
 
 The rest of the files are the same as the original container used by LTSF-Linear and AutoFormer. It contains the data provider and the Exp class. We have added a custom Exp class for UMS-Linear, providing more customization for training.
