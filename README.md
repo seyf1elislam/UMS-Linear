@@ -27,9 +27,6 @@ This simple architecture gives UMS-Linear the following characteristics:
 > - O(1) time/memory complexity
 > - Small number of parameters that can be trained with the lowest computational cost
 
-### Impact of Timestamps:
-
-> The impact of timestamps is visualized by comparing a simple linear model with a linear model with timestamps.<br/> ![alt text](https://raw.githubusercontent.com/seyf1elislam/UMS-Linear/main/imgs/linear_vs_timestamp_linear_plot.png)
 
 ## Model Training
 
