@@ -9,8 +9,9 @@ def train_it(args,global_model_dict,use_edited_exp=True,
              use_custom_loss=False,
              custom_loss=None,
              fix_seed=None,
-             save_return_dict_asfile=False):
+             save_return_dict_asfile=False,use_visual=True):
   #=========================
+  args.use_visual = use_visual
   if use_edited_exp:
     Exp = Exp_Main_Edit1
   else :
