@@ -31,6 +31,7 @@ def full_train(
     save_return_dict_asfile=False,
     patience =3,
     use_print = True,
+    use_visual=True,
     ):
   torch.cuda.empty_cache()
   fix_seed = seed
@@ -65,6 +66,7 @@ def full_train(
   args.enc_in = enc_in
   args.individual = False
   args.use_print = use_print
+  args.use_visual = use_visual
 
   # args.patch_len = 16
   # args.stride = 8
