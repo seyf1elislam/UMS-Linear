@@ -364,7 +364,8 @@ class Exp_Main_Edit1(Exp_Basic):
                     gt = np.concatenate((input[0, :, -1], true[0, :, -1]), axis=0)
                     # pd = np.concatenate((input[0, :, -1], pred[0, :, -1]), axis=0)
                     pd = pred[0, :, -1]
-                    visual(gt, pd, os.path.join(folder_path, str(i) + '.pdf'))
+                    if(args.use_visual):
+                        visual(gt, pd, os.path.join(folder_path, str(i) + '.pdf'))
 
         if self.args.test_flop:
             test_params_flop((batch_x.shape[1],batch_x.shape[2]))
